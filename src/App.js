@@ -5,7 +5,7 @@ import { router } from './Routes/Routes';
 
 function App() {
   return (
-    <div>
+    <div className='font-montserrat'>
       <RouterProvider router={router}>
 
       </RouterProvider>
