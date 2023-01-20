@@ -15,7 +15,12 @@ module.exports = {
     ]
   },
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'banner': "url('/src/Assets/banner-1.jpg')",
+        'newsletter': "url('/src/Assets/newsletter.jpg')",
+      }
+    },
     fontFamily: {
       montserrat: ['Montserrat', 'sans-serif']
     }
