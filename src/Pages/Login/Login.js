@@ -1,14 +1,31 @@
 import React from 'react';
+import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Context/AuthProvider';
 
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm()
 
+    const { loginUser } = useContext(AuthContext)
+
     const handleOnSubmit = (data) => {
         const { email, password } = data
-        console.log(email, password)
+        loginUser(email, password)
+            .then(res => {
+                console.log(res.user)
+                toast.success('Login successfull')
+                reset()
+            }).catch(error => {
+                if (error.message === 'Firebase: Error (auth/wrong-password).') {
+                    toast.error('Incorrect password')
+                } else if (error.message === 'Firebase: Error (auth/user-not-found).') {
+                    toast.error('User not found please register')
+                }
+                console.log(error)
+            })
     }
 
     return (
