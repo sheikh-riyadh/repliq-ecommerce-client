@@ -19,6 +19,8 @@ module.exports = {
       backgroundImage: {
         'banner': "url('/src/Assets/banner-1.jpg')",
         'newsletter': "url('/src/Assets/newsletter.jpg')",
+        'countdown-banner': "url('/src/Assets/countdown-banner.jpg')",
+
       }
     },
     fontFamily: {
