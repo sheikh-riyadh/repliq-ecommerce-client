@@ -9,15 +9,19 @@ import { AuthContext } from '../../Context/AuthProvider';
 const Register = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm()
     /* User context API here */
-    const { createUser } = useContext(AuthContext)
+    const { createUser, updateUserProfile } = useContext(AuthContext)
 
     /* Created user from here */
     const handleOnSubmit = (data) => {
-        const { email, password } = data
+        const { email, password, name } = data
         createUser(email, password)
-            .then(() => {
+            .then((res) => {
+                updateUserProfile(name).then(() => {
+                    console.log(res.user)
+                }).catch(error => console.log(error))
                 toast.success('Registration Successfull')
                 reset()
+
             }).catch(error => {
                 if (error.message === 'Firebase: Error (auth/email-already-in-use).') {
                     toast.error('User already registered')
