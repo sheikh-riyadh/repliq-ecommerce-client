@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import Spinner from '../Spinner/Spinner';
 import Product from './Product';
 
 const Products = () => {
@@ -12,7 +13,7 @@ const Products = () => {
         }
     })
     if (isLoading) {
-        return <p>Loading....</p>
+        return <Spinner></Spinner>
     }
     return (
         <div className='mx-5 md:mx-10 lg:mx-20 my-20 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10'>
