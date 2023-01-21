@@ -7,7 +7,7 @@ const Header = () => {
         return <>
             <li className='mr2 lg:mr-5'><Link to='/home'>Home</Link></li>
             <li className='mr2 lg:mr-5'><Link to='/login'>Login</Link></li>
-            <li className='mr2 lg:mr-5'><Link to='/blogs'>Register</Link></li>
+            <li className='mr2 lg:mr-5'><Link to='/register'>Register</Link></li>
             <li className='mr2 lg:mr-5'><Link to='/blogs'>Dashboad</Link></li>
         </>
     }
