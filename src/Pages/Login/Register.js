@@ -1,14 +1,27 @@
 import React from 'react';
+import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Context/AuthProvider';
 
 
 const Register = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm()
+    const { createUser } = useContext(AuthContext)
 
+    /* Created user from here */
     const handleOnSubmit = (data) => {
         const { email, password } = data
-        console.log(email, password)
+        createUser(email, password)
+            .then(() => {
+                toast.success('Registration Successfull')
+                reset()
+            }).catch(error => {
+                if (error.message === 'Firebase: Error (auth/email-already-in-use).') {
+                    toast.error('User already registered')
+                }
+            })
     }
 
     return (
