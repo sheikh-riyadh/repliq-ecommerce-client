@@ -1,0 +1,4 @@
+.productImage:hover>.productInfo {
+    display: block;
+    transition-duration: 1s;
+}

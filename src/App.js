@@ -1,6 +1,7 @@
 import { RouterProvider } from 'react-router-dom';
 import './App.css';
 import { router } from './Routes/Routes';
+import 'animate.css';
 
 
 function App() {
