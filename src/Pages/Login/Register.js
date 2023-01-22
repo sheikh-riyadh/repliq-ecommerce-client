@@ -10,6 +10,7 @@ import { AuthContext } from '../../Context/AuthProvider';
 const Register = () => {
     const [loadin, setLoaing] = useState(false)
     const { register, formState: { errors }, handleSubmit, reset } = useForm()
+
     /* User context API here */
     const { createUser, updateUserProfile } = useContext(AuthContext)
 
