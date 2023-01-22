@@ -9,7 +9,9 @@ import Product from './Product';
 
 const Products = () => {
     const [product, setProduct] = useState(null)
-    const { setAddProductCount } = useContext(AuthContext)
+
+    /* User context */
+    const { setAddProductCount, user, loading } = useContext(AuthContext)
     let count = 0
 
     /* Get all product from database */
@@ -22,8 +24,7 @@ const Products = () => {
         }
     })
 
-    /* User context */
-    const { user, loading } = useContext(AuthContext)
+
 
     /* Handling buying product here */
     const handleBuy = (product) => {

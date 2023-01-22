@@ -4,7 +4,6 @@ import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Login/Register";
 import ViewCart from "../Pages/ViewCart/ViewCarts";
-import PrivateRouter from "./PrivateRouter";
 
 
 
@@ -29,7 +28,7 @@ export const router = createBrowserRouter([
                 element: <Register></Register>
             }, {
                 path: '/view-cart',
-                element: <PrivateRouter><ViewCart></ViewCart></PrivateRouter>
+                element: <ViewCart></ViewCart>
             }
         ]
     }

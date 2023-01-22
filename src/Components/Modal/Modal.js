@@ -1,11 +1,51 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { toast } from 'react-hot-toast';
+import { AuthContext } from '../../Context/AuthProvider';
+import Spinner from '../Spinner/Spinner';
 
 const Modal = ({ product }) => {
+    const { setAddProductCount, user, loading } = useContext(AuthContext)
+    let count = 0
+
+    /* Handling buying product here */
+    const handleBuy = () => {
+        count++
+        if (loading) {
+            return <Spinner></Spinner>
+        }
+        else if (!user?.uid) {
+            toast.error("Please login first to buy this product")
+        } else {
+            const { productName, price, productImage, quantity } = product
+            const addedProduct = {
+                productName,
+                price,
+                productImage,
+                quantity,
+                buyerEmail: user?.email
+            }
+            addToCart(addedProduct)
+        }
+    }
+
+
+    /* Add purchase product to database here */
+    const addToCart = async (addedProduct) => {
+        const res = await fetch(`${process.env.REACT_APP_api_url}/add-to-cart`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(addedProduct)
+        });
+        const data = await res.json()
+        if (data?.acknowledged) {
+            toast.success("Add product successfull")
+            setAddProductCount(count)
+        }
+    }
     return (
         <div>
-            {/* The button to open modal */}
-
-            {/* Put this part before </body> tag */}
             <input type="checkbox" id="productModal" className="modal-toggle" />
             <div className="modal">
                 <div className="modal-box w-8/12 max-w-3xl relative">
@@ -26,6 +66,7 @@ const Modal = ({ product }) => {
                                 <div className="badge badge-lg bg-green-600"></div>
                                 <div className="badge badge-lg bg-yellow-500"></div>
                             </div>
+                            <label htmlFor="productModal" onClick={handleBuy} className="btn btn-secondary my-5 w-full text-white">Add to cart</label>
                         </div>
                     </div>
                 </div>
