@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
@@ -10,13 +10,16 @@ const Login = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm()
 
     const { loginUser } = useContext(AuthContext)
+    const [loadin, setLoaing] = useState(false)
 
     const handleOnSubmit = (data) => {
+        setLoaing(true)
         const { email, password } = data
         loginUser(email, password)
             .then(res => {
                 console.log(res.user)
                 toast.success('Login successfull')
+                setLoaing(false)
                 reset()
             }).catch(error => {
                 if (error.message === 'Firebase: Error (auth/wrong-password).') {
@@ -56,7 +59,7 @@ const Login = () => {
                                 </label>
                             </div>
                             <div className="form-control mt-6">
-                                <button className="btn btn-secondary text-white">Login</button>
+                                <button className="btn btn-secondary text-white">{loadin ? "processing...." : "Login"}</button>
                             </div>
                         </form>
                     </div>

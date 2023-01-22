@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
@@ -7,12 +7,14 @@ import { AuthContext } from '../../Context/AuthProvider';
 
 
 const Register = () => {
+    const [loadin, setLoaing] = useState(false)
     const { register, formState: { errors }, handleSubmit, reset } = useForm()
     /* User context API here */
     const { createUser, updateUserProfile } = useContext(AuthContext)
 
     /* Created user from here */
     const handleOnSubmit = (data) => {
+        setLoaing(true)
         const { email, password, name } = data
         createUser(email, password)
             .then((res) => {
@@ -20,6 +22,7 @@ const Register = () => {
                     console.log(res.user)
                 }).catch(error => console.log(error))
                 toast.success('Registration Successfull')
+                setLoaing(false)
                 reset()
 
             }).catch(error => {
@@ -63,7 +66,7 @@ const Register = () => {
                                 </label>
                             </div>
                             <div className="form-control mt-6">
-                                <button className="btn btn-secondary text-white">Register</button>
+                                <button className="btn btn-secondary text-white">{loadin ? "processing...." : "Register"}</button>
                             </div>
                         </form>
                     </div>
