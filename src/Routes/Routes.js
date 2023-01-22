@@ -3,7 +3,7 @@ import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Login/Register";
-import ViewCart from "../Pages/ViewCart/ViewCart";
+import ViewCart from "../Pages/ViewCart/ViewCarts";
 import PrivateRouter from "./PrivateRouter";
 
 

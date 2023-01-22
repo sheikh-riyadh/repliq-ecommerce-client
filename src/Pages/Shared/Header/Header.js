@@ -16,15 +16,10 @@ const Header = () => {
             return data;
         }
     })
-    if (addProductCount >= 0) {
-        refetch()
-        console.log('inside 1')
-    } if (addProductCount === 0) {
-        console.log('inside 0')
-    } else {
-        console.log('inside else')
+    if (addProductCount >= 0 || addProductCount === 0) {
         refetch()
     }
+
     cartProducts?.forEach(product => {
         return totalPrice += product?.price
     })
