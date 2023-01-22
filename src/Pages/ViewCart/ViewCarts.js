@@ -1,12 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
+import { toast } from 'react-hot-toast';
 import Spinner from '../../Components/Spinner/Spinner';
 import { AuthContext } from '../../Context/AuthProvider';
 
 const ViewCarts = () => {
 
     const { user } = useContext(AuthContext)
-    const { data: cartProducts, isLoading } = useQuery({
+    const { data: cartProducts, isLoading, refetch } = useQuery({
         queryKey: ['add-to-cart', user?.email],
         queryFn: async () => {
             const res = await fetch(`${process.env.REACT_APP_api_url}/add-to-cart?email=${user?.email}`);
@@ -20,7 +21,17 @@ const ViewCarts = () => {
     }
 
     const handleDelete = (id) => {
-
+        const agree = window.confirm("Are you sure you want to delete?")
+        if (agree) {
+            fetch(`${process.env.REACT_APP_api_url}/add-to-cart/${id}`, {
+                method: 'DELETE',
+            }).then(res => res.json()).then(data => {
+                if (data.deletedCount > 0) {
+                    toast.success("Deleted successfull")
+                    refetch()
+                }
+            })
+        }
     }
 
     return (

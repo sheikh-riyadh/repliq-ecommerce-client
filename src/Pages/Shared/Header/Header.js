@@ -1,13 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../../Assets/logo.png'
 import { AuthContext } from '../../../Context/AuthProvider';
 
 const Header = () => {
-    let totalPrice = 0;
 
-    const { user, addProductCount } = useContext(AuthContext)
+    let totalPrice = 0;
+    const navigate = useNavigate()
+
+    const { user, addProductCount, logOutUser } = useContext(AuthContext)
     const { data: cartProducts, refetch } = useQuery({
         queryKey: ['add-to-cart', user?.email],
         queryFn: async () => {
@@ -16,6 +18,13 @@ const Header = () => {
             return data;
         }
     })
+
+    const handleLogOut = () => {
+        logOutUser().then(
+            navigate('/')
+        ).catch(error => console.log(error))
+    }
+
     if (addProductCount >= 0 || addProductCount === 0) {
         refetch()
     }
@@ -27,9 +36,18 @@ const Header = () => {
     const headerItems = () => {
         return <>
             <li className='mr2 lg:mr-5'><Link to='/home'>Home</Link></li>
-            <li className='mr2 lg:mr-5'><Link to='/login'>Login</Link></li>
-            <li className='mr2 lg:mr-5'><Link to='/register'>Register</Link></li>
-            <li className='mr2 lg:mr-5'><Link to='/blogs'>Dashboad</Link></li>
+            {
+                user?.uid ?
+                    <>
+                        <li className='mr2 lg:mr-5'><Link to='/blogs'>Dashboad</Link></li>
+                        <li onClick={handleLogOut} className='mr2 lg:mr-5'><span>Log out</span></li>
+                    </>
+                    :
+                    <>
+                        <li className='mr2 lg:mr-5'><Link to='/login'>Login</Link></li>
+                        <li className='mr2 lg:mr-5'><Link to='/register'>Register</Link></li>
+                    </>
+            }
         </>
     }
 
