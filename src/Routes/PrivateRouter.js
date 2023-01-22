@@ -12,7 +12,7 @@ const PrivateRouter = ({ children }) => {
         return <Spinner></Spinner>
     }
     else if (!user?.uid) {
-        toast.error("Please login first to buy this product")
+        toast.error("Please login to see cart page")
         return <Navigate to='/login' state={{ from: location }} replace></Navigate>
     }
     return children
