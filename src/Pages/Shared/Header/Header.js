@@ -9,6 +9,7 @@ const Header = () => {
     let totalPrice = 0;
     const navigate = useNavigate()
 
+    /* Get all add to cart products from here */
     const { user, addProductCount, logOutUser } = useContext(AuthContext)
     const { data: cartProducts, refetch } = useQuery({
         queryKey: ['add-to-cart', user?.email],
@@ -19,16 +20,30 @@ const Header = () => {
         }
     })
 
+
+    /* Get user role data from here */
+    const { data: userData } = useQuery({
+        queryKey: ['userRole', user?.email],
+        queryFn: async () => {
+            const res = await fetch(`${process.env.REACT_APP_api_url}/user-role?email=${user?.email}`);
+            const data = await res.json();
+            return data
+        }
+    })
+
+    /* Log out from here */
     const handleLogOut = () => {
         logOutUser().then(
             navigate('/')
         ).catch(error => console.log(error))
     }
 
+    /* Check user add button was click or not */
     if (addProductCount >= 0 || addProductCount === 0) {
         refetch()
     }
 
+    /* Calculte total price from here */
     cartProducts?.forEach(product => {
         return totalPrice += product?.price
     })
@@ -39,7 +54,6 @@ const Header = () => {
             {
                 user?.uid ?
                     <>
-                        <li className='mr2 lg:mr-5'><Link to='/blogs'>Dashboad</Link></li>
                         <li onClick={handleLogOut} className='mr2 lg:mr-5'><span>Log out</span></li>
                     </>
                     :
@@ -50,7 +64,7 @@ const Header = () => {
             }
         </>
     }
-
+    console.log(userData)
     return (
         <div className="shadow-md sticky top-0 bg-white z-50">
             <div className='lg:mx-20'>
@@ -60,10 +74,30 @@ const Header = () => {
                             <label tabIndex={0} className="btn btn-ghost lg:hidden">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                             </label>
-                            <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                            <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-white rounded-box w-52">
                                 {
                                     headerItems()
                                 }
+                                <li tabIndex={0}>
+                                    <span className="justify-between">
+                                        Dashboad
+                                        <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+                                    </span>
+                                    <ul className="p-2 bg-secondary text-white">
+                                        {
+                                            userData?.role === "buyer" ?
+                                                <>
+                                                    <li><Link>Submenu 1</Link></li>
+                                                    <li><Link>Submenu 2</Link></li>
+                                                </>
+                                                :
+                                                <>
+                                                    <li><Link>Submenu 1</Link></li>
+                                                    <li><Link>Submenu 2</Link></li>
+                                                </>
+                                        }
+                                    </ul>
+                                </li>
                             </ul>
                         </div>
                         <Link className="btn btn-ghost normal-case text-xl">
@@ -75,6 +109,28 @@ const Header = () => {
                             {
                                 headerItems()
                             }
+                            <li tabIndex={0} className='bg-white'>
+                                <Link>
+                                    Dashboad
+                                    <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>
+                                </Link>
+                                <ul className="p-2 bg-secondary text-white">
+                                    {
+                                        userData?.role === "buyer" ?
+                                            <>
+                                                <li><Link>My Orders</Link></li>
+                                                <li><Link>View Cart</Link></li>
+                                            </>
+                                            :
+                                            <>
+                                                <li><Link> Customers List</Link></li>
+                                                <li><Link>Add Customer</Link></li>
+                                                <li><Link>Product List</Link></li>
+                                                <li><Link to='/add-product'>Add Product</Link></li>
+                                            </>
+                                    }
+                                </ul>
+                            </li>
                         </ul>
                     </div>
                     <div className="navbar-end">
