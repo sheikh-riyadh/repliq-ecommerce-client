@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { AuthContext } from '../../Context/AuthProvider';
 import Modal from '../Modal/Modal';
 import Spinner from '../Spinner/Spinner';
 import Product from './Product';
@@ -15,6 +17,22 @@ const Products = () => {
             return data
         }
     })
+
+    const { user, loading } = useContext(AuthContext)
+
+    const handleBuy = (product) => {
+        console.log(product)
+        if (loading) {
+            return <Spinner></Spinner>
+        }
+        else if (!user?.uid) {
+            toast.error("Please login first to buy this product")
+        } else {
+            toast.success("added product")
+        }
+    }
+
+
     if (isLoading) {
         return <Spinner></Spinner>
     }
@@ -26,6 +44,7 @@ const Products = () => {
                         product={product}
                         key={product?._id}
                         setProduct={setProduct}
+                        handleBuy={handleBuy}
                     ></Product>)
                 }
             </div>
