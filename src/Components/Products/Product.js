@@ -23,7 +23,7 @@ const Product = ({ product, setProduct, handleBuy }) => {
                         </>
                             :
                             <>
-                                <div className="badge absolute badge-success rounded-none top-3 left-0 font-bold text-white">{`${product?.discount}% off`}</div>
+                                <div className="badge absolute badge-success rounded-none top-3 left-0 font-bold text-white">{`${product?.discount ? "20 % off" : "New"}`}</div>
                             </>
                     }
                 </div>

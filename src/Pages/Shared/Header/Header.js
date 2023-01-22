@@ -64,7 +64,7 @@ const Header = () => {
             }
         </>
     }
-    console.log(userData)
+
     return (
         <div className="shadow-md sticky top-0 bg-white z-50">
             <div className='lg:mx-20'>
@@ -88,13 +88,15 @@ const Header = () => {
                                             {
                                                 userData?.role === "buyer" ?
                                                     <>
-                                                        <li><Link>Submenu 1</Link></li>
-                                                        <li><Link>Submenu 2</Link></li>
+                                                        <li><Link>My Orders</Link></li>
+                                                        <li><Link>View Cart</Link></li>
                                                     </>
                                                     :
                                                     <>
-                                                        <li><Link>Submenu 1</Link></li>
-                                                        <li><Link>Submenu 2</Link></li>
+                                                        <li><Link to='/all-users'> Customers List</Link></li>
+                                                        <li><Link>Add Customer</Link></li>
+                                                        <li><Link to='/products-list'>Product List</Link></li>
+                                                        <li><Link to='/add-product'>Add Product</Link></li>
                                                     </>
                                             }
                                         </ul>
@@ -126,7 +128,7 @@ const Header = () => {
                                                 </>
                                                 :
                                                 <>
-                                                    <li><Link> Customers List</Link></li>
+                                                    <li><Link to='/all-users'> Customers List</Link></li>
                                                     <li><Link>Add Customer</Link></li>
                                                     <li><Link to='/products-list'>Product List</Link></li>
                                                     <li><Link to='/add-product'>Add Product</Link></li>
