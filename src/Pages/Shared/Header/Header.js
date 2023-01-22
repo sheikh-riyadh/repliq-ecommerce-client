@@ -78,26 +78,28 @@ const Header = () => {
                                 {
                                     headerItems()
                                 }
-                                <li tabIndex={0}>
-                                    <span className="justify-between">
-                                        Dashboad
-                                        <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
-                                    </span>
-                                    <ul className="p-2 bg-secondary text-white">
-                                        {
-                                            userData?.role === "buyer" ?
-                                                <>
-                                                    <li><Link>Submenu 1</Link></li>
-                                                    <li><Link>Submenu 2</Link></li>
-                                                </>
-                                                :
-                                                <>
-                                                    <li><Link>Submenu 1</Link></li>
-                                                    <li><Link>Submenu 2</Link></li>
-                                                </>
-                                        }
-                                    </ul>
-                                </li>
+                                {user?.uid &&
+                                    <li tabIndex={0}>
+                                        <span className="justify-between">
+                                            Dashboad
+                                            <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+                                        </span>
+                                        <ul className="p-2 bg-secondary text-white">
+                                            {
+                                                userData?.role === "buyer" ?
+                                                    <>
+                                                        <li><Link>Submenu 1</Link></li>
+                                                        <li><Link>Submenu 2</Link></li>
+                                                    </>
+                                                    :
+                                                    <>
+                                                        <li><Link>Submenu 1</Link></li>
+                                                        <li><Link>Submenu 2</Link></li>
+                                                    </>
+                                            }
+                                        </ul>
+                                    </li>
+                                }
                             </ul>
                         </div>
                         <Link className="btn btn-ghost normal-case text-xl">
@@ -109,28 +111,30 @@ const Header = () => {
                             {
                                 headerItems()
                             }
-                            <li tabIndex={0} className='bg-white'>
-                                <Link>
-                                    Dashboad
-                                    <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>
-                                </Link>
-                                <ul className="p-2 bg-secondary text-white">
-                                    {
-                                        userData?.role === "buyer" ?
-                                            <>
-                                                <li><Link>My Orders</Link></li>
-                                                <li><Link>View Cart</Link></li>
-                                            </>
-                                            :
-                                            <>
-                                                <li><Link> Customers List</Link></li>
-                                                <li><Link>Add Customer</Link></li>
-                                                <li><Link>Product List</Link></li>
-                                                <li><Link to='/add-product'>Add Product</Link></li>
-                                            </>
-                                    }
-                                </ul>
-                            </li>
+                            {user?.uid &&
+                                <li tabIndex={0} className='bg-white'>
+                                    <Link>
+                                        Dashboad
+                                        <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>
+                                    </Link>
+                                    <ul className="p-2 bg-secondary text-white">
+                                        {
+                                            userData?.role === "buyer" ?
+                                                <>
+                                                    <li><Link>My Orders</Link></li>
+                                                    <li><Link>View Cart</Link></li>
+                                                </>
+                                                :
+                                                <>
+                                                    <li><Link> Customers List</Link></li>
+                                                    <li><Link>Add Customer</Link></li>
+                                                    <li><Link>Product List</Link></li>
+                                                    <li><Link to='/add-product'>Add Product</Link></li>
+                                                </>
+                                        }
+                                    </ul>
+                                </li>
+                            }
                         </ul>
                     </div>
                     <div className="navbar-end">

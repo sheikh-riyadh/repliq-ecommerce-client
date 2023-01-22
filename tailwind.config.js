@@ -5,7 +5,7 @@ module.exports = {
     themes: [
       {
         fiama: {
-          primary: '#000',
+          primary: '#222',
           secondary: '#E55472',
           accent: "#3A4256",
           neutral: "#191D24",
