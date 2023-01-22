@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
@@ -18,11 +19,13 @@ const Register = () => {
         const { email, password, name } = data
         createUser(email, password)
             .then((res) => {
+                /* Update user profile */
                 updateUserProfile(name).then(() => {
-                    console.log(res.user)
+                    saveUserDataBase(res?.user)
                 }).catch(error => console.log(error))
                 toast.success('Registration Successfull')
                 setLoaing(false)
+
                 reset()
 
             }).catch(error => {
@@ -30,6 +33,15 @@ const Register = () => {
                     toast.error('User already registered')
                 }
             })
+    }
+
+    /* Save user database here */
+    const saveUserDataBase = (user) => {
+        axios.post(`${process.env.REACT_APP_api_url}/save-user`, {
+            userName: user?.displayName,
+            userEmail: user?.email,
+            role: "buyer"
+        }).then().catch(error => console.log(error))
     }
 
     return (
