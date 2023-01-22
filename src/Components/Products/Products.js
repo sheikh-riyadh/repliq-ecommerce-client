@@ -9,6 +9,8 @@ import Product from './Product';
 
 const Products = () => {
     const [product, setProduct] = useState(null)
+    const { setAddProductCount } = useContext(AuthContext)
+    let count = 0
 
     /* Get all product from database */
     const { data: products, isLoading } = useQuery({
@@ -25,6 +27,7 @@ const Products = () => {
 
     /* Handling buying product here */
     const handleBuy = (product) => {
+        count++
         if (loading) {
             return <Spinner></Spinner>
         }
@@ -56,6 +59,7 @@ const Products = () => {
         const data = await res.json()
         if (data?.acknowledged) {
             toast.success("Add product successfull")
+            setAddProductCount(count)
         }
     }
     if (isLoading) {

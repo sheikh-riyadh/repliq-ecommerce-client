@@ -1,23 +1,32 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../../Assets/logo.png'
-import Spinner from '../../../Components/Spinner/Spinner';
 import { AuthContext } from '../../../Context/AuthProvider';
 
 const Header = () => {
+    let totalPrice = 0;
 
-    const { user } = useContext(AuthContext)
-
-
-
-    const { data: cartProducts } = useQuery({
+    const { user, addProductCount } = useContext(AuthContext)
+    const { data: cartProducts, refetch } = useQuery({
         queryKey: ['add-to-cart', user?.email],
         queryFn: async () => {
             const res = fetch(`${process.env.REACT_APP_api_url}/add-to-cart?email=${user?.email}`);
             const data = (await res).json()
             return data;
         }
+    })
+    if (addProductCount >= 0) {
+        refetch()
+        console.log('inside 1')
+    } if (addProductCount === 0) {
+        console.log('inside 0')
+    } else {
+        console.log('inside else')
+        refetch()
+    }
+    cartProducts?.forEach(product => {
+        return totalPrice += product?.price
     })
 
     const headerItems = () => {
@@ -65,8 +74,8 @@ const Header = () => {
                             </label>
                             <div tabIndex={0} className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow">
                                 <div className="card-body">
-                                    <span className="font-bold text-lg">{cartProducts?.length}</span>
-                                    <span className="text-primary">Subtotal: $999</span>
+                                    <span className="font-bold text-lg">Items {cartProducts?.length}</span>
+                                    <span className="text-primary">Subtotal: $ {totalPrice}</span>
                                     <div className="card-actions">
                                         <Link to='/view-cart' className="btn btn-secondary text-white btn-block">View cart</Link>
                                     </div>

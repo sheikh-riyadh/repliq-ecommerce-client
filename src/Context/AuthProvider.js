@@ -8,6 +8,7 @@ const auth = getAuth(app)
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [addProductCount, setAddProductCount] = useState(null)
 
 
     /* Create user */
@@ -46,7 +47,7 @@ const AuthProvider = ({ children }) => {
         return () => unsubscribe();
     }, []);
 
-    const authInfo = { createUser, loginUser, logOutUser, loading, user, updateUserProfile }
+    const authInfo = { createUser, loginUser, logOutUser, loading, user, updateUserProfile, setAddProductCount, addProductCount }
     return (
         <AuthContext.Provider value={authInfo}>
             {children}
