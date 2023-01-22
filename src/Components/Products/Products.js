@@ -9,6 +9,8 @@ import Product from './Product';
 
 const Products = () => {
     const [product, setProduct] = useState(null)
+
+    /* Get all product from database */
     const { data: products, isLoading } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
@@ -18,21 +20,44 @@ const Products = () => {
         }
     })
 
+    /* User context */
     const { user, loading } = useContext(AuthContext)
 
+    /* Handling buying product here */
     const handleBuy = (product) => {
-        console.log(product)
         if (loading) {
             return <Spinner></Spinner>
         }
         else if (!user?.uid) {
             toast.error("Please login first to buy this product")
         } else {
-            toast.success("added product")
+            const { productName, price, productImage, quantity } = product
+            const addedProduct = {
+                productName,
+                price,
+                productImage,
+                quantity,
+                buyerEmail: user?.email
+            }
+            addToCart(addedProduct)
         }
     }
 
 
+    /* Add purchase product to database here */
+    const addToCart = async (addedProduct) => {
+        const res = await fetch(`${process.env.REACT_APP_api_url}/add-to-cart`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(addedProduct)
+        });
+        const data = await res.json()
+        if (data?.acknowledged) {
+            toast.success("Add product successfull")
+        }
+    }
     if (isLoading) {
         return <Spinner></Spinner>
     }
