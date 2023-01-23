@@ -51,6 +51,7 @@ const Header = () => {
     const headerItems = () => {
         return <>
             <li className='mr2 lg:mr-5'><Link to='/home'>Home</Link></li>
+            <li className='mr2 lg:mr-5'><Link to='/all-products'>All products</Link></li>
             {
                 user?.uid ?
                     <>
@@ -89,7 +90,7 @@ const Header = () => {
                                                 userData?.role === "buyer" &&
                                                 <>
                                                     <li><Link>My Orders</Link></li>
-                                                    <li><Link>View Cart</Link></li>
+                                                    <li><Link to='/view-cart'>View Cart</Link></li>
                                                 </>
                                             }
                                             {
@@ -126,7 +127,7 @@ const Header = () => {
                                             userData?.role === "buyer" &&
                                             <>
                                                 <li><Link>My Orders</Link></li>
-                                                <li><Link>View Cart</Link></li>
+                                                <li><Link to='/view-cart'>View Cart</Link></li>
                                             </>
                                         }
                                         {

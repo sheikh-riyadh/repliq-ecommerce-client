@@ -3,6 +3,7 @@ import Main from "../Layout/Main";
 import AddProduct from "../Pages/AdminPage/AddProduct/AddProduct";
 import CustomerList from "../Pages/AdminPage/CustomerList/CustomerList";
 import ProductList from "../Pages/AdminPage/ProductList/ProductList";
+import AllProducts from "../Pages/AllProducts/AllProducts";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Login/Register";
@@ -42,6 +43,9 @@ export const router = createBrowserRouter([
             }, {
                 path: '/all-customers',
                 element: <PrivateRouter><CustomerList></CustomerList></PrivateRouter>
+            }, {
+                path: '/all-products',
+                element: <AllProducts></AllProducts>
             }
         ]
     }
