@@ -21,6 +21,7 @@ const ViewCarts = () => {
         return <Spinner></Spinner>
     }
 
+
     const handleDelete = (id) => {
         const agree = window.confirm("Are you sure you want to delete?")
         if (agree) {
