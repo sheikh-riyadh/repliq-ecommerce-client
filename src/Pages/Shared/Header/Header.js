@@ -95,7 +95,7 @@ const Header = () => {
                                             {
                                                 userData?.role === "admin" &&
                                                 <>
-                                                    <li><Link to='/all-users'> Customers List</Link></li>
+                                                    <li><Link to='/all-customers'> Customers List</Link></li>
                                                     <li><Link>Add Customer</Link></li>
                                                     <li><Link to='/products-list'>Product List</Link></li>
                                                     <li><Link to='/add-product'>Add Product</Link></li>

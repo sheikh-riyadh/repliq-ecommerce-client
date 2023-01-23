@@ -59,13 +59,13 @@ const AddProduct = () => {
 
     }
     return (
-        <div className="hero my-11 lg:my-0">
+        <div className="hero min-h-screen bg-white">
             <div className="hero-content flex-col">
                 <div className="text-center lg:text-left">
                     <h1 className="text-3xl font-bold">Add product</h1>
                 </div>
-                <form onSubmit={handleSubmit(handleOnSubmit)} className="card flex-shrink-0 w-full bg-primary max-w-sm">
-                    <div className="card-body">
+                <div className="card flex-shrink-0 max-w-xs lg:max-w-md shadow-2xl bg-primary">
+                    <form onSubmit={handleSubmit(handleOnSubmit)} className="card-body">
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text text-white">Product name</span>
@@ -97,8 +97,8 @@ const AddProduct = () => {
                         <div className="form-control mt-6">
                             <button className="btn-secondary text-white btn border-0">{loading ? "Processing..." : "Add Product"}</button>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     );
