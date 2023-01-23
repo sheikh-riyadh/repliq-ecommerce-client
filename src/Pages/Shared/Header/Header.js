@@ -86,18 +86,20 @@ const Header = () => {
                                         </span>
                                         <ul className="p-2 bg-secondary text-white">
                                             {
-                                                userData?.role === "buyer" ?
-                                                    <>
-                                                        <li><Link>My Orders</Link></li>
-                                                        <li><Link>View Cart</Link></li>
-                                                    </>
-                                                    :
-                                                    <>
-                                                        <li><Link to='/all-users'> Customers List</Link></li>
-                                                        <li><Link>Add Customer</Link></li>
-                                                        <li><Link to='/products-list'>Product List</Link></li>
-                                                        <li><Link to='/add-product'>Add Product</Link></li>
-                                                    </>
+                                                userData?.role === "buyer" &&
+                                                <>
+                                                    <li><Link>My Orders</Link></li>
+                                                    <li><Link>View Cart</Link></li>
+                                                </>
+                                            }
+                                            {
+                                                userData?.role === "admin" &&
+                                                <>
+                                                    <li><Link to='/all-users'> Customers List</Link></li>
+                                                    <li><Link>Add Customer</Link></li>
+                                                    <li><Link to='/products-list'>Product List</Link></li>
+                                                    <li><Link to='/add-product'>Add Product</Link></li>
+                                                </>
                                             }
                                         </ul>
                                     </li>
@@ -121,18 +123,20 @@ const Header = () => {
                                     </Link>
                                     <ul className="p-2 bg-secondary text-white">
                                         {
-                                            userData?.role === "buyer" ?
-                                                <>
-                                                    <li><Link>My Orders</Link></li>
-                                                    <li><Link>View Cart</Link></li>
-                                                </>
-                                                :
-                                                <>
-                                                    <li><Link to='/all-users'> Customers List</Link></li>
-                                                    <li><Link>Add Customer</Link></li>
-                                                    <li><Link to='/products-list'>Product List</Link></li>
-                                                    <li><Link to='/add-product'>Add Product</Link></li>
-                                                </>
+                                            userData?.role === "buyer" &&
+                                            <>
+                                                <li><Link>My Orders</Link></li>
+                                                <li><Link>View Cart</Link></li>
+                                            </>
+                                        }
+                                        {
+                                            userData?.role === "admin" &&
+                                            <>
+                                                <li><Link to='/all-customers'> Customers List</Link></li>
+                                                <li><Link>Add Customer</Link></li>
+                                                <li><Link to='/products-list'>Product List</Link></li>
+                                                <li><Link to='/add-product'>Add Product</Link></li>
+                                            </>
                                         }
                                     </ul>
                                 </li>

@@ -7,6 +7,7 @@ import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Login/Register";
 import ViewCart from "../Pages/ViewCart/ViewCarts";
+import PrivateRouter from "./PrivateRouter";
 
 
 
@@ -31,16 +32,16 @@ export const router = createBrowserRouter([
                 element: <Register></Register>
             }, {
                 path: '/view-cart',
-                element: <ViewCart></ViewCart>
+                element: <PrivateRouter><ViewCart></ViewCart></PrivateRouter>
             }, {
                 path: '/add-product',
-                element: <AddProduct></AddProduct>
+                element: <PrivateRouter><AddProduct></AddProduct></PrivateRouter>
             }, {
                 path: '/products-list',
-                element: <ProductList></ProductList>
+                element: <PrivateRouter><ProductList></ProductList></PrivateRouter>
             }, {
-                path: '/all-users',
-                element: <CustomerList></CustomerList>
+                path: '/all-customers',
+                element: <PrivateRouter><CustomerList></CustomerList></PrivateRouter>
             }
         ]
     }

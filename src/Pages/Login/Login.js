@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
 
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm()
 
+    const navigate = useNavigate()
     const { loginUser } = useContext(AuthContext)
     const [loadin, setLoaing] = useState(false)
 
@@ -17,10 +18,13 @@ const Login = () => {
         const { email, password } = data
         loginUser(email, password)
             .then(res => {
+                navigate('/')
                 toast.success('Login successfull')
                 setLoaing(false)
                 reset()
             }).catch(error => {
+                setLoaing(false)
+                reset()
                 if (error.message === 'Firebase: Error (auth/wrong-password).') {
                     toast.error('Incorrect password')
                 } else if (error.message === 'Firebase: Error (auth/user-not-found).') {

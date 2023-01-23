@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
 
 
@@ -11,6 +11,7 @@ const Register = () => {
     const [loadin, setLoaing] = useState(false)
     const { register, formState: { errors }, handleSubmit, reset } = useForm()
 
+    const navigate = useNavigate()
     /* User context API here */
     const { createUser, updateUserProfile } = useContext(AuthContext)
 
@@ -20,6 +21,8 @@ const Register = () => {
         const { email, password, name } = data
         createUser(email, password)
             .then((res) => {
+
+                navigate('/')
                 /* Update user profile */
                 updateUserProfile(name).then(() => {
                     saveUserDataBase(res?.user)
@@ -30,6 +33,8 @@ const Register = () => {
                 reset()
 
             }).catch(error => {
+                setLoaing(false)
+                reset()
                 if (error.message === 'Firebase: Error (auth/email-already-in-use).') {
                     toast.error('User already registered')
                 }

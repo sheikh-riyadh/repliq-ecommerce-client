@@ -22,6 +22,9 @@ const CustomerList = () => {
         return <Spinner></Spinner>
     }
 
+
+    const customersList = allUsers.filter(user => user?.role !== 'admin')
+
     const handleDelete = (id) => {
         const agree = window.confirm("Are you sure you want to delete?")
         if (agree) {
@@ -39,7 +42,7 @@ const CustomerList = () => {
     return (
         <div className='mx-5 md:mx-10 lg:mx-20 my-20'>
             {
-                allUsers?.length > 0 ?
+                customersList?.length > 0 ?
                     <div>
                         <h1 className='uppercase my-5 md:text-3xl lg:text-5xl font-bold'>Customer List</h1>
                         <div className="overflow-x-auto">
@@ -54,7 +57,7 @@ const CustomerList = () => {
                                 </thead>
                                 <tbody className='text-center '>
                                     {
-                                        allUsers?.map((user, i) => <tr
+                                        customersList?.map((user, i) => <tr
                                             key={i}
                                         >
                                             <td><FaUserCircle className='text-5xl'></FaUserCircle></td>
