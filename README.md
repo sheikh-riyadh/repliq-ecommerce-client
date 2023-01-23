@@ -68,3 +68,23 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+PROJECT DETAILS FROM HERE
+=========================
+
+PROJECT FEATURE
+===============
+    1. Here is two user role 1 is buyer 2. admin
+    2. admin can add product delete product and se all the customer and also delete custom if admin want.
+
+    ADMIN DETAILS
+    =============
+    USER: demo@gmail.com.
+    PASS: !@#$3210
+
+    CUSTOMER DETAIL
+    ===============
+    USER: johndoe@gmail.com
+    PASS: !@#$3210
