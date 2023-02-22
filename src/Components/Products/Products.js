@@ -8,11 +8,11 @@ import Spinner from '../Spinner/Spinner';
 import Product from './Product';
 
 const Products = () => {
-    const [product, setProduct] = useState(null)
+    const [product, setProduct] = useState([])
 
     /* User context */
     const { setAddProductCount, user, loading } = useContext(AuthContext)
-    let count = 0
+
 
     /* Get all product from database */
     const { data: products, isLoading } = useQuery({
@@ -24,11 +24,8 @@ const Products = () => {
         }
     })
 
-
-
     /* Handling buying product here */
     const handleBuy = (product) => {
-        count++
         if (loading) {
             return <Spinner></Spinner>
         }
@@ -60,7 +57,7 @@ const Products = () => {
         const data = await res.json()
         if (data?.acknowledged) {
             toast.success("Add product successfull")
-            setAddProductCount(count)
+            setAddProductCount((preValue) => preValue + 1)
         }
     }
     if (isLoading) {

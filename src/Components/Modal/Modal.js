@@ -5,11 +5,10 @@ import Spinner from '../Spinner/Spinner';
 
 const Modal = ({ product }) => {
     const { setAddProductCount, user, loading } = useContext(AuthContext)
-    let count = 0
+
 
     /* Handling buying product here */
     const handleBuy = () => {
-        count++
         if (loading) {
             return <Spinner></Spinner>
         }
@@ -41,7 +40,7 @@ const Modal = ({ product }) => {
         const data = await res.json()
         if (data?.acknowledged) {
             toast.success("Add product successfull")
-            setAddProductCount(count)
+            setAddProductCount((preValue) => preValue + 1)
         }
     }
     return (

@@ -42,6 +42,8 @@ const Login = () => {
                         <h1 className="text-5xl font-bold text-center">Login now!</h1>
                     </div>
                     <div className="card flex-shrink-0 lg:w-[400px] shadow-2xl bg-primary">
+                        <div className='text-white text-center my-5'><p>admin: demo@gmail.com</p>
+                            <p>passowrd: !@#$3210</p></div>
                         <form onSubmit={handleSubmit(handleOnSubmit)} className="card-body">
                             <div className="form-control ">
                                 <label className="label">

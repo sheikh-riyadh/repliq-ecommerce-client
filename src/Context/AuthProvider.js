@@ -8,7 +8,7 @@ const auth = getAuth(app)
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [addProductCount, setAddProductCount] = useState(null)
+    const [addProductCount, setAddProductCount] = useState(0)
 
 
     /* Create user */

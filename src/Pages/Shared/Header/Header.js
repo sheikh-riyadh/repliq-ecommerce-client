@@ -4,22 +4,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../../Assets/logo.png'
 import { AuthContext } from '../../../Context/AuthProvider';
 
-const Header = () => {
+const Header = ({ cartProducts, refetch }) => {
 
     let totalPrice = 0;
     const navigate = useNavigate()
 
     /* Get all add to cart products from here */
     const { user, addProductCount, logOutUser } = useContext(AuthContext)
-    const { data: cartProducts, refetch } = useQuery({
-        queryKey: ['add-to-cart', user?.email],
-        queryFn: async () => {
-            const res = fetch(`${process.env.REACT_APP_api_url}/add-to-cart?email=${user?.email}`);
-            const data = (await res).json()
-            return data;
-        }
-    })
-
 
     /* Get user role data from here */
     const { data: userData } = useQuery({
@@ -40,6 +31,7 @@ const Header = () => {
 
     /* Check user add button was click or not */
     if (addProductCount >= 0 || addProductCount === 0) {
+        console.log(addProductCount)
         refetch()
     }
 
@@ -124,7 +116,6 @@ const Header = () => {
                                         {
                                             userData?.role === "buyer" &&
                                             <>
-                                                <li><Link>My Orders</Link></li>
                                                 <li><Link to='/view-cart'>View Cart</Link></li>
                                             </>
                                         }
@@ -132,7 +123,6 @@ const Header = () => {
                                             userData?.role === "admin" &&
                                             <>
                                                 <li><Link to='/all-customers'> Customers List</Link></li>
-                                                <li><Link>Add Customer</Link></li>
                                                 <li><Link to='/products-list'>Product List</Link></li>
                                                 <li><Link to='/add-product'>Add Product</Link></li>
                                             </>
